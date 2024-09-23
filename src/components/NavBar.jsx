@@ -2,12 +2,18 @@ import React from "react";
 
 const Navbar = () => {
   return (
-    <nav className="bg-white shadow-md w-full">
+    <nav className="w-full">
       <div className="container mx-auto px-4 flex items-center justify-between h-[75px] max-w-[1440px]">
         {/* Logo Section */}
         <div className="flex items-center">
-          <img src="/logo.png" alt="Pizza Logo" className="h-10 w-10 mr-2" />
-          <span className="text-xl font-bold">Pizza</span>
+          <img
+            src="/assets/logo_pizza.png"
+            alt="Logo"
+            className="h-10 w-10 mr-2"
+          />
+          <span className="w-[66.06px] h-[19.48px] font-bold text-[#AF5901] text-left opacity-100">
+            Pizza
+          </span>
         </div>
 
         {/* Navigation Links */}
@@ -18,7 +24,7 @@ const Navbar = () => {
           <li>
             <a
               href="#home"
-              className="font-inter text-[25px] font-bold leading-[36.17px] tracking-[0.03em] text-left text-[#FF8100] text-gray-700 hover:text-[#FF8100]"
+              className="font-inter text-[25px] font-bold leading-[36.17px] tracking-[0.03em] text-left text-[#FF8100] hover:text-[#FF8100]"
             >
               Home
             </a>
