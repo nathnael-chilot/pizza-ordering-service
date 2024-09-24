@@ -2,6 +2,7 @@ import React from "react";
 import FeaturedPizza from "../FeaturedPizza";
 import Hero from "../Hero";
 import Navbar from "../NavBar";
+import TopRestaurants from "../TopRestaurants";
 
 const HomePage = () => {
   return (
@@ -12,6 +13,7 @@ const HomePage = () => {
       </div>
       <div>
         <FeaturedPizza />
+        <TopRestaurants />
       </div>
     </div>
   );
