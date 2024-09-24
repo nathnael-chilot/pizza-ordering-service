@@ -2,6 +2,7 @@ import React from "react";
 import FeaturedPizza from "../FeaturedPizza";
 import Hero from "../Hero";
 import Navbar from "../NavBar";
+import PopularPizzas from "../PopularPizzas";
 import TopRestaurants from "../TopRestaurants";
 
 const HomePage = () => {
@@ -14,6 +15,7 @@ const HomePage = () => {
       <div>
         <FeaturedPizza />
         <TopRestaurants />
+        <PopularPizzas />
       </div>
     </div>
   );
