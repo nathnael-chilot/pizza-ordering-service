@@ -23,7 +23,7 @@ const Navbar = () => {
         >
           <li>
             <a
-              href="#home"
+              href="/home"
               className="font-inter text-[25px] font-bold leading-[36.17px] tracking-[0.03em] text-left text-[#FF8100] hover:text-[#FF8100]"
             >
               Home
@@ -32,7 +32,7 @@ const Navbar = () => {
 
           <li>
             <a
-              href="#order"
+              href="/orders"
               className="w-[86px] h-[36px] gap-0 opacity-100 font-inter text-[25px] font-medium leading-[36.17px] tracking-[0.03em] text-left text-[#16120DBF] hover:text-[#FF8100]"
             >
               Orders
@@ -41,7 +41,7 @@ const Navbar = () => {
 
           <li>
             <a
-              href="#order"
+              href="/whoweare"
               className="w-[144px] h-[36px] gap-0 opacity-100 font-inter text-[25px] font-medium leading-[36.17px] tracking-[0.03em] text-left text-[#16120DBF] hover:text-[#FF8100]"
             >
               who we are
