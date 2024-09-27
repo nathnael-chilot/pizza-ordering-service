@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -23,7 +24,7 @@ const Navbar = () => {
         >
           <li>
             <a
-              href="/home"
+              href="/"
               className="font-inter text-[25px] font-bold leading-[36.17px] tracking-[0.03em] text-left text-[#FF8100] hover:text-[#FF8100]"
             >
               Home
@@ -51,14 +52,16 @@ const Navbar = () => {
 
         {/* Register Button */}
         <div>
-          <button
-            className="w-[168px] h-[56px] top-[14px] left-[1244px] 
+          <Link to="/register">
+            <button
+              className="w-[168px] h-[56px] top-[14px] left-[1244px] 
   px-[30px] py-[10px] gap-0 rounded-[5px] bg-[#FF890F] opacity-100"
-          >
-            <span className="w-[108px] h-[36px] font-inter text-[25px] font-bold leading-[36.17px] tracking-[0.03em] text-left text-white">
-              Register
-            </span>
-          </button>
+            >
+              <span className="w-[108px] h-[36px] font-inter text-[25px] font-bold leading-[36.17px] tracking-[0.03em] text-left text-white">
+                Register
+              </span>
+            </button>
+          </Link>
         </div>
       </div>
     </nav>
