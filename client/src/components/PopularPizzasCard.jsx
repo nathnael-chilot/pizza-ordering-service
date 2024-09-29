@@ -6,7 +6,7 @@ const PopularPizzasCard = () => {
   return (
     <div className="w-[387px] h-[621px] pt-[30px] gap-[15px] rounded-[25px] opacity-100 bg-white">
       <div className="w-[327px] h-[466px] gap-[10px] opacity-100 ml-[30px]">
-        <div className="w-[318px] h-[318px] gap-0 opacity-100">
+        <div className="w-[318px] h-[318px] flex items-center rounded-full bg-[#EA810033] pb-9 gap-0 opacity-100">
           <Avatar
             alt="restaurant"
             src="/assets/heropizza.png"
