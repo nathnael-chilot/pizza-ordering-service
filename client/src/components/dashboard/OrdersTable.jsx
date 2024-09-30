@@ -18,9 +18,9 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { fakeData, usStates } from "./makeData";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { fakeData, usStates } from "./makeData";
 
 const Example = () => {
   const [validationErrors, setValidationErrors] = useState({});
@@ -35,8 +35,8 @@ const Example = () => {
         size: 80,
       },
       {
-        accessorKey: "firstName",
-        header: "First Name",
+        accessorKey: "name",
+        header: "Name",
         muiEditTextFieldProps: ({ cell, row }) => ({
           type: "text",
           required: true,
@@ -55,16 +55,16 @@ const Example = () => {
         }),
       },
       {
-        accessorKey: "lastName",
-        header: "Last Name",
+        accessorKey: "phoneNo", // Replace with your actual data key for the phone number
+        header: "Phone Number",
         muiEditTextFieldProps: ({ cell, row }) => ({
-          type: "text",
+          type: "tel", // Use "tel" for phone number inputs
           required: true,
           error: !!validationErrors?.[cell.id],
           helperText: validationErrors?.[cell.id],
           onBlur: (event) => {
             const validationError = !validateRequired(event.currentTarget.value)
-              ? "Required"
+              ? "Phone number is required"
               : undefined;
             setValidationErrors({
               ...validationErrors,
@@ -74,6 +74,7 @@ const Example = () => {
           },
         }),
       },
+
       {
         accessorKey: "email",
         header: "Email",
@@ -94,22 +95,22 @@ const Example = () => {
           },
         }),
       },
-      {
-        accessorKey: "state",
-        header: "State",
-        editVariant: "select",
-        editSelectOptions: usStates,
-        muiEditTextFieldProps: ({ row }) => ({
-          select: true,
-          error: !!validationErrors?.state,
-          helperText: validationErrors?.state,
-          onChange: (event) =>
-            setEditedUsers({
-              ...editedUsers,
-              [row.id]: { ...row.original, state: event.target.value },
-            }),
-        }),
-      },
+      // {
+      //   accessorKey: "state",
+      //   header: "State",
+      //   editVariant: "select",
+      //   editSelectOptions: usStates,
+      //   muiEditTextFieldProps: ({ row }) => ({
+      //     select: true,
+      //     error: !!validationErrors?.state,
+      //     helperText: validationErrors?.state,
+      //     onChange: (event) =>
+      //       setEditedUsers({
+      //         ...editedUsers,
+      //         [row.id]: { ...row.original, state: event.target.value },
+      //       }),
+      //   }),
+      // },
     ],
     [editedUsers, validationErrors]
   );
@@ -160,16 +161,9 @@ const Example = () => {
     positionActionsColumn: "last",
     getRowId: (row) => row.id,
     muiToolbarAlertBannerProps: isLoadingUsersError
-      ? {
-          color: "error",
-          children: "Error loading data",
-        }
+      ? { color: "error", children: "Error loading data" }
       : undefined,
-    muiTableContainerProps: {
-      sx: {
-        minHeight: "500px",
-      },
-    },
+    muiTableContainerProps: { sx: { minHeight: "500px" } },
     onCreatingRowCancel: () => setValidationErrors({}),
     onCreatingRowSave: handleCreateUser,
     renderRowActions: ({ row }) => (
@@ -201,12 +195,36 @@ const Example = () => {
     ),
     renderTopToolbarCustomActions: ({ table }) => (
       <Button
+        sx={{
+          width: "127px",
+          height: "34px",
+          // position: "absolute",
+          // top: "281px",
+          // left: "71.64px",
+          gap: "10px",
+          borderRadius: "5px",
+          opacity: 100,
+          backgroundColor: "#FF8100",
+          "&:hover": {
+            backgroundColor: "#FF9921",
+          },
+          color: "#FFFFFF",
+          fontFamily: "Roboto",
+          fontSize: "16px",
+          fontWeight: 700,
+          lineHeight: "24px",
+          letterSpacing: "0.15px",
+          textAlign: "left",
+          justifyContent: "flex-start",
+          py: "5px",
+          px: "20px",
+        }}
         variant="contained"
         onClick={() => {
           table.setCreatingRow(true);
         }}
       >
-        Create New User
+        Add User
       </Button>
     ),
     state: {
@@ -231,10 +249,7 @@ function useCreateUser() {
     onMutate: (newUserInfo) => {
       queryClient.setQueryData(["users"], (prevUsers) => [
         ...prevUsers,
-        {
-          ...newUserInfo,
-          id: (Math.random() + 1).toString(36).substring(7),
-        },
+        { ...newUserInfo, id: (Math.random() + 1).toString(36).substring(7) },
       ]);
     },
   });
@@ -305,16 +320,10 @@ const validateEmail = (email) =>
     .match(
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([^<>()[\]\\.,;:\s@"]+\.)+[^<>()[\]\\.,;:\s@"]{2,})$/
     );
-const validateUser = (user) => {
-  const errors = {};
-  if (!validateRequired(user.firstName)) {
-    errors.firstName = "Required";
-  }
-  if (!validateRequired(user.lastName)) {
-    errors.lastName = "Required";
-  }
-  if (!validateEmail(user.email)) {
-    errors.email = "Incorrect Email Format";
-  }
-  return errors;
-};
+
+const validateUser = (user) => ({
+  firstName: !validateRequired(user.firstName) ? "Required" : undefined,
+  lastName: !validateRequired(user.lastName) ? "Required" : undefined,
+  email: !validateEmail(user.email) ? "Incorrect Email Format" : undefined,
+  state: !validateRequired(user.state) ? "Required" : undefined,
+});

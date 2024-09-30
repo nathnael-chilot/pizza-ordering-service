@@ -6,6 +6,8 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
+import ExampleWithProviders from "./OrdersTable";
+import AddMenu from "./AddMenu";
 
 const SideBar = () => {
   // State to manage the active button's text
@@ -180,17 +182,23 @@ const SideBar = () => {
           </div>
         </div>
       </div>
-      <div className="w-[1182px] h-[67px] pl-[23px] pr-[30px] pt-[20px] pb-[20px] gap-0 border-l border-solid border-[#0000000D] opacity-100 bg-white shadow-[7px_0px_15px_#0000000D] flex items-center justify-between">
-        <span className="w-auto h-[27px] top-[20px] left-[23px] font-inter font-normal text-[22px] leading-[26.63px] text-[#000000] gap-0 opacity-100">
-          {activeText}
-        </span>
-        <div className="w-[88px] h-[24px] top-[21px] gap-[40px] opacity-100 flex items-center justify-between">
-          <NotificationsOutlinedIcon
-            sx={{ width: "34.5px", height: "34.5px" }}
-          />
-          <AccountCircleOutlinedIcon
-            sx={{ width: "34.5px", height: "34.5px" }}
-          />
+      <div className="flex flex-col overflow-hidden">
+        <div className="w-[1090px] h-[67px] pl-[23px] pr-[30px] pt-[20px] pb-[20px] gap-0 border-l border-solid border-[#0000000D] opacity-100 bg-white shadow-[7px_0px_15px_#0000000D] flex items-center justify-between">
+          <span className="w-auto h-[27px] top-[20px] left-[23px] font-inter font-normal text-[22px] leading-[26.63px] text-[#000000] gap-0 opacity-100">
+            {activeText}
+          </span>
+          <div className="w-[88px] h-[24px] top-[21px] gap-[40px] opacity-100 flex items-center justify-between">
+            <NotificationsOutlinedIcon
+              sx={{ width: "34.5px", height: "34.5px" }}
+            />
+            <AccountCircleOutlinedIcon
+              sx={{ width: "34.5px", height: "34.5px" }}
+            />
+          </div>
+        </div>
+        <div className="w-[1142px] h-[925px] top-[87px] left-[278px] rounded-[5px] gap-0 opacity-100">
+          {/* <ExampleWithProviders /> */}
+          <AddMenu />
         </div>
       </div>
     </div>
