@@ -68,7 +68,7 @@ const PopularPizzasCard = () => {
           </div>
         </div>
       </div>
-      <div class="w-[327px] h-0 gap-0 ml my-[15px] mx-[30px] border-t border-solid border-[#00000033] opacity-100"></div>
+      <div className="w-[327px] h-0 gap-0 ml my-[15px] mx-[30px] border-t border-solid border-[#00000033] opacity-100"></div>
       <div className="w-[327px] h-[65px] mx-[30px] gap-0 opacity-100 flex items-center justify-between">
         <Avatar
           alt="restaurant"

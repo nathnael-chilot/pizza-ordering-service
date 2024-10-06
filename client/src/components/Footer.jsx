@@ -2,9 +2,9 @@ import React from "react";
 import SendIcon from "@mui/icons-material/Send";
 import Avatar from "@mui/material/Avatar";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import YouTubeIcon from '@mui/icons-material/YouTube';
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import YouTubeIcon from "@mui/icons-material/YouTube";
 
 const Footer = () => {
   return (
@@ -47,7 +47,7 @@ const Footer = () => {
               </a>
             </div>
           </div>
-          <dvi className="w-[423px] h-[62px] gap-[20px] mr-[20px] opacity-100">
+          <div className="w-[423px] h-[62px] gap-[20px] mr-[20px] opacity-100">
             <input
               placeholder="Your feedback..."
               className="w-[380px] h-[62px] border-[1px] rounded-[12px] justify-between py-[18px] px-[24px] bg-[#FFFFFF] gap-0 opacity-100"
@@ -56,7 +56,7 @@ const Footer = () => {
             <button className="w-[30px] h-[30px]  gap-0 opacity-100">
               <SendIcon sx={{}} />
             </button>
-          </dvi>
+          </div>
         </div>
       </div>
       <div className="w-full max-w-screen overflow-x-hidden h-[104px] flex border-t py-[16px] px-[162px] gap-[355px] opacity-100 bg-black">

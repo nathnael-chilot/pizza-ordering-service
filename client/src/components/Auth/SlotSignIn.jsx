@@ -1,4 +1,5 @@
 import * as React from "react";
+import axios from "axios";
 import {
   Button,
   FormControl,
@@ -25,7 +26,7 @@ function CustomEmailField() {
       name="email"
       type="email"
       size="small"
-      placeholder="john@gmail.com"
+      placeholder="abebe@gmail.com"
       required
       fullWidth
       slotProps={{
@@ -85,9 +86,38 @@ function CustomPasswordField() {
 }
 
 function CustomButton() {
+  const handleLogin = async () => {
+    console.log("Login function triggered");
+
+    const email = document.getElementsByName("email")[0].value;
+    const password = document.getElementsByName("password")[0].value;
+
+    console.log("Sending login request..."); // Add this to debug
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        {
+          email,
+          password,
+        }
+      );
+
+      // Handle the successful response
+      window.location.href = "/orders";
+      console.log("Login successful:", response.data);
+    } catch (error) {
+      // Log any error
+      console.error(
+        "Error during login:",
+        error.response ? error.response.data : error.message
+      );
+    }
+  };
+
   return (
     <Button
-      type="submit"
+      type="button"
       variant="outlined"
       color="info"
       size="small"
@@ -107,11 +137,7 @@ function CustomButton() {
         },
         transition: "all 300ms ease-out", // Animation timing and duration
       }}
-      onClick={() => {
-        // Handle click event and navigation here
-        // For example, using react-router for navigation:
-        // navigate('/desktop-detail');
-      }}
+      onClick={handleLogin}
     >
       <span className="text-white">Sign In</span>
     </Button>

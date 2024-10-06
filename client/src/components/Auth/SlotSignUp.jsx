@@ -15,7 +15,7 @@ const signupSchema = z.object({
     .min(8, "Confirm Password must be at least 8 characters"),
   location: z.string().nonempty("Location is required"),
   phoneNumber: z.string().nonempty("Phone Number is required"),
-  terms: z.boolean().refine((val) => val === false, {
+  terms: z.boolean().refine((val) => val === true, {
     message: "You must accept the terms and conditions",
   }),
 });
@@ -34,11 +34,16 @@ const SlotsSignUp = () => {
     try {
       const response = await axios.post(
         "http://localhost:5000/api/auth/register",
-        data
+        {
+          ...data,
+          agreeToTerms: checked,
+        }
       );
-      console.log(response.data); // Handle success (e.g., navigate to a different page)
+      console.log("Response:", response);
+      // Handle success - e.g., navigate to login page
+      window.location.href = "/login";
     } catch (error) {
-      console.error("Error during registration:", error.response.data);
+      console.error("Error during registration:", error.response?.data);
     }
   };
 
