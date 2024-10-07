@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 
@@ -61,6 +62,8 @@ const PopularPizzasCard = () => {
                 textAlign: "center",
                 justifyContent: "flex-center",
               }}
+              component={Link}
+              to="/register"
               variant="contained"
             >
               Order

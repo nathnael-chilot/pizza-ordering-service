@@ -15,6 +15,8 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { AppProvider, SignInPage } from "@toolpad/core";
 import { useTheme } from "@mui/material/styles";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
 
 const providers = [{ id: "credentials", name: "Email and Password" }];
 
@@ -86,13 +88,15 @@ function CustomPasswordField() {
 }
 
 function CustomButton() {
+  const [alert, setAlert] = React.useState(null); // State to manage the alert
+
   const handleLogin = async () => {
     console.log("Login function triggered");
 
     const email = document.getElementsByName("email")[0].value;
     const password = document.getElementsByName("password")[0].value;
 
-    console.log("Sending login request..."); // Add this to debug
+    console.log("Sending login request...");
 
     try {
       const response = await axios.post(
@@ -103,11 +107,30 @@ function CustomButton() {
         }
       );
 
-      // Handle the successful response
-      window.location.href = "/orders";
+      // Handle the successful response by setting an alert
+      setAlert({
+        severity: "success",
+        title: "Success",
+        message: "You have successfully logged in!",
+      });
+
+      // Redirect to the orders page after a delay (if needed)
+      setTimeout(() => {
+        window.location.href = "/orders";
+      }, 1000);
+
       console.log("Login successful:", response.data);
     } catch (error) {
-      // Log any error
+      // Set an error alert if login fails
+      setAlert({
+        severity: "error",
+        title: "Error",
+        message:
+          error.response && error.response.data
+            ? error.response.data.message
+            : "Login failed. Please try again.",
+      });
+
       console.error(
         "Error during login:",
         error.response ? error.response.data : error.message
@@ -116,31 +139,41 @@ function CustomButton() {
   };
 
   return (
-    <Button
-      type="button"
-      variant="outlined"
-      color="info"
-      size="small"
-      disableElevation
-      fullWidth
-      sx={{
-        padding: "8px 22px", // Padding
-        gap: 0, // Gap
-        borderRadius: "var(--borderRadius)", // Border radius
-        opacity: 1, // Set opacity to 1 (for visibility, or adjust if needed)
-        backgroundColor: "#FF8100", // Background color
-        boxShadow: `0px 3px 1px -2px #00000033,
+    <>
+      {/* Conditionally render the alert if it's set */}
+      {alert && (
+        <Alert severity={alert.severity} onClose={() => setAlert(null)}>
+          <AlertTitle>{alert.title}</AlertTitle>
+          {alert.message}
+        </Alert>
+      )}
+
+      <Button
+        type="button"
+        variant="outlined"
+        color="info"
+        size="small"
+        disableElevation
+        fullWidth
+        sx={{
+          padding: "8px 22px",
+          gap: 0,
+          borderRadius: "var(--borderRadius)",
+          opacity: 1,
+          backgroundColor: "#FF8100",
+          boxShadow: `0px 3px 1px -2px #00000033,
                 0px 2px 2px 0px #00000024,
-                0px 1px 5px 0px #0000001F`, // Box shadow
-        "&:hover": {
-          backgroundColor: "#FF8100", // Ensure background color remains on hover
-        },
-        transition: "all 300ms ease-out", // Animation timing and duration
-      }}
-      onClick={handleLogin}
-    >
-      <span className="text-white">Sign In</span>
-    </Button>
+                0px 1px 5px 0px #0000001F`,
+          "&:hover": {
+            backgroundColor: "#FF8100",
+          },
+          transition: "all 300ms ease-out",
+        }}
+        onClick={handleLogin}
+      >
+        <span className="text-white">Sign In</span>
+      </Button>
+    </>
   );
 }
 

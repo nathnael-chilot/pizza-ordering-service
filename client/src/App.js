@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import ErrorPage from "./components/404";
 import LogIn from "./components/Auth/LogIn";
 import SignUp from "./components/Auth/SignUp";
 import SideBar from "./components/dashboard/SideBar";
@@ -22,6 +23,7 @@ function App() {
           <Route path="/register" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />
         </Route>
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </div>
   );
