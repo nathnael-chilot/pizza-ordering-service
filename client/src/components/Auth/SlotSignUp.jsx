@@ -7,18 +7,26 @@ import { zodResolver } from "@hookform/resolvers/zod"; // You will need to insta
 import axios from "axios"; // You will need to install this package
 
 // Validation schema using Zod
-const signupSchema = z.object({
-  email: z.string().email("Invalid email address"),
-  password: z.string().min(8, "Password must be at least 8 characters"),
-  confirmPassword: z
-    .string()
-    .min(8, "Confirm Password must be at least 8 characters"),
-  location: z.string().nonempty("Location is required"),
-  phoneNumber: z.string().nonempty("Phone Number is required"),
-  terms: z.boolean().refine((val) => val === true, {
-    message: "You must accept the terms and conditions",
-  }),
-});
+const signupSchema = z
+  .object({
+    email: z.string().email("Invalid email address"),
+    password: z.string().min(8, "Password must be at least 8 characters"),
+    confirmPassword: z
+      .string()
+      .min(8, "Confirm Password must be at least 8 characters"),
+    location: z.string().nonempty("Location is required"),
+    phoneNumber: z
+      .string()
+      .length(10, "Phone Number must be exactly 10 digits")
+      .regex(/^\d+$/, "Phone Number must contain only numbers"),
+    terms: z.boolean().refine((val) => val === true, {
+      message: "You must accept the terms and conditions",
+    }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
 
 const SlotsSignUp = () => {
   const [checked, setChecked] = useState(false);
